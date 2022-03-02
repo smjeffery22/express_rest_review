@@ -10,19 +10,23 @@ app.set('view engine', 'ejs');
 
 let comments = [
 	{
-		username: 'Todd',
+		id: 1,
+    username: 'Todd',
 		comment: 'lol, that is so funny',
 	},
 	{
-		username: 'Skyler',
+		id: 2,
+    username: 'Skyler',
 		comment: 'I like to go birdwatching with my dog',
 	},
 	{
-		username: 'Sk8erBoi',
+		id: 3,
+    username: 'Sk8erBoi',
 		comment: 'Please delete your account, Todd',
 	},
 	{
-		username: 'onlysayswoof',
+		id: 4,
+    username: 'onlysayswoof',
 		comment: 'woof woof woof',
 	},
 ];
@@ -42,14 +46,21 @@ app.post('/comments', (req, res) => {
   res.redirect('/comments');
 });
 
-app.get('/tacos', (req, res) => {
-	res.send('GET /tacos response');
-});
+app.get('/comments/:id', (req, res) => {
+  const { id } = req.params;
+  const comment = comments.find(c => c.id === parseInt(id));
 
-app.post('/tacos', (req, res) => {
-	const { meat, qty } = req.body;
-	res.send(`Order: ${qty} ${meat} tacos`);
-});
+  res.render('comments/show', { comment });
+})
+
+// app.get('/tacos', (req, res) => {
+// 	res.send('GET /tacos response');
+// });
+
+// app.post('/tacos', (req, res) => {
+// 	const { meat, qty } = req.body;
+// 	res.send(`Order: ${qty} ${meat} tacos`);
+// });
 
 app.listen(3000, () => {
 	console.log('RUNNING ON PORT 3000!');
