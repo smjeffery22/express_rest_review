@@ -76,6 +76,14 @@ app.patch('/comments/:id', (req, res) => {
   res.redirect('/comments');
 })
 
+app.delete('/comments/:id', (req, res) => {
+  const { id } = req.params;
+
+  comments = comments.filter(c => c.id !== id);
+
+  res.redirect('/comments');
+})
+
 // app.get('/tacos', (req, res) => {
 // 	res.send('GET /tacos response');
 // });
